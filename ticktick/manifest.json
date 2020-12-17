@@ -1,0 +1,12 @@
+{
+	"manifest_version": 2,
+	"name": "ticktick",
+	"version": "1.0",
+	"description": "Shortcuts for TickTick",
+	"content_scripts": [
+		{
+			"matches": ["https://ticktick.com/*"],
+			"js": ["shortcuts.js", "timer.js"]
+		}
+	]
+}
