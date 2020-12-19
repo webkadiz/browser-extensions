@@ -166,6 +166,7 @@ function makeRequestToTickTickPomodoro() {
 
 function startTimer() {
     startTime = new Date()
+
     playPauseEl.classList.remove("state-play")
     playPauseEl.classList.add("state-pause")
 
@@ -176,10 +177,10 @@ function startTimer() {
 }
 
 function endTimer() {
-    timeEl.innerHTML = genTimeStr(timePassed)
+    if (playPauseEl.classList.contains("state-play")) return
 
     endTime = new Date()
-    
+
     playPauseEl.classList.remove("state-pause")
     playPauseEl.classList.add("state-play")
 
@@ -198,8 +199,10 @@ playPauseEl.addEventListener("click", () => {
 
 stopEl.addEventListener("click", () => {
     timePassed = 0
-    startTime = new Date()
-    endTimer()
+    timeEl.innerHTML = genTimeStr(timePassed)
+
+    playPauseEl.classList.remove("state-pause")
+    playPauseEl.classList.add("state-play")
 })
 
 window.addEventListener("load", () => {
@@ -213,4 +216,8 @@ window.addEventListener("load", () => {
 
         pomoContainer.prepend(timerContainer)
     }, 6000)
+})
+
+window.addEventListener("beforeunload", () => {
+    endTimer()
 })
