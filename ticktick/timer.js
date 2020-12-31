@@ -1,3 +1,16 @@
+new MutationObserver(appShowUpHandler)
+    .observe(document.querySelector("#root"), {
+        childList: true
+    })
+
+function appShowUpHandler() {
+    const pomoContainer = document.querySelector("#left-bottom-view")
+
+    pomoContainer.prepend(timerContainer)
+
+    this.disconnect()
+}
+
 let startTime
 let endTime
 let timePassed = 0
@@ -203,19 +216,6 @@ stopEl.addEventListener("click", () => {
 
     playPauseEl.classList.remove("state-pause")
     playPauseEl.classList.add("state-play")
-})
-
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        const pomoContainer = document.querySelector("#left-bottom-view")
-        
-        if (!pomoContainer) {
-            alert("Timer not load")
-            return
-        }
-
-        pomoContainer.prepend(timerContainer)
-    }, 6000)
 })
 
 window.addEventListener("beforeunload", () => {
