@@ -6,7 +6,7 @@
 	"content_scripts": [
 		{
 			"matches": ["https://ticktick.com/*"],
-			"js": ["shortcuts.js", "timer.js", "list-navigation.js"]
+			"js": ["shortcuts.js", "timer.js", "list-navigation.js", "time-planner-popup.js"]
 		}
 	]
 }
