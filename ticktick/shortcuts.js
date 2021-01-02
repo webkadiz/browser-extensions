@@ -12,9 +12,6 @@ window.addEventListener("keydown", e => {
             e.preventDefault()
             document.querySelector(".CodeMirror textarea").focus()
         }
-        if (e.code === "KeyE") {
-            
-        }
         if (e.code === "KeyD") { // focus on editor
             e.preventDefault()
             document.querySelectorAll(".CodeMirror textarea")[2].focus()
