@@ -25,9 +25,11 @@ function injectFontAwesomeScript() {
 
 function injectTimePlannerPopupBtn() {
     let taskListHeader = document.querySelector(".tl-bar"),
-        headerRightBar = taskListHeader.querySelector(".line-right"),
-        timePlannerPopupBtn = headerRightBar.firstElementChild.cloneNode(true)
-    
+        headerRightBar = taskListHeader.querySelector(".line-right")
+
+    if (!headerRightBar) return
+
+    timePlannerPopupBtn = headerRightBar.firstElementChild.cloneNode(true)
 
     timePlannerPopupBtn.firstElementChild.innerHTML = 
         `<div class="time-planner-popup-btn"><i class="fas fa-ruler"></i></div>`
