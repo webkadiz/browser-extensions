@@ -60,14 +60,8 @@ function processSearchFormDynamicElements() {
         searchClose = document.querySelector(".delete.fake-del")
      
     if (searchSuggest) {
-        searchSuggest.style = `
-            right: auto;
-            top: 50px;
-        `
-
-        searchClose.style = `
-            display: none;
-        `            
+        searchSuggest.classList.add("search-suggest-override")
+        searchClose.classList.add("d-none")
     }
 }
 
@@ -89,9 +83,7 @@ function searchFormRemoveClasses() {
 
 function processSearchInput() {
     store.searchInput.value = ""
-    store.searchInput.style = `
-        position: static;
-    `
+    store.searchInput.classList.add("position-static")
     store.searchInput.focus()
 }
 
@@ -113,7 +105,8 @@ function searchInputFocusHandler() {
 }
 
 function searchInputBlurHandler() {
-    store.searchInput.style = ""
+    store.searchInput.classList.remove("position-static")
+
     
     searchFormRemoveClasses()        
 

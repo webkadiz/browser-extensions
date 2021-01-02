@@ -23,5 +23,14 @@
 }
 
 .d-none {
-    display: none;
+    display: none !important;
+}
+
+.position-static {
+    position: static !important;
+}
+
+.search-suggest-override {
+    right: auto !important;
+    top: 50px !important;
 }
