@@ -21,7 +21,7 @@ function injectStyles() {
     let style = document.createElement("style")
 
     style.innerHTML = `
-        .time-planner-popup {
+        .popup-extension {
             width: auto !important;
             height: auto !important;
             min-height: auto !important;
@@ -43,6 +43,10 @@ function injectStyles() {
 
         .time-planner-popup-btn:hover {
             opacity: .56;
+        }
+
+        .d-none {
+            display: none;
         }
     `
 
