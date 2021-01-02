@@ -13,18 +13,7 @@ window.addEventListener("keydown", e => {
             document.querySelector(".CodeMirror textarea").focus()
         }
         if (e.code === "KeyE") {
-            e.preventDefault()
-            const searchForm = document.querySelector(".search-form") 
-            const searchInput = document.querySelector(".search-box") 
-
-            searchForm.classList.remove("inactive")
-            searchForm.classList.add("active")
-            searchInput.focus()
-
-            searchInput.addEventListener("blur", () => {
-                searchForm.classList.remove("active")
-                searchForm.classList.add("inactive")
-            })
+            
         }
         if (e.code === "KeyD") { // focus on editor
             e.preventDefault()
