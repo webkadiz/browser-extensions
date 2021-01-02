@@ -48,7 +48,7 @@ function addDefaultSmartListsToCommonListContainer() {
 }
 
 function makeListsResponsiveOnClick() {
-    let listsAll = document.querySelectorAll(".project, .custom-smart-project, l-folder"),
+    let listsAll = document.querySelectorAll(".project, .custom-smart-project, .l-folder"),
         folderObserver
 
     listResponsiveClickHandler(listsAll)
