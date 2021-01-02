@@ -1,6 +1,6 @@
 window.addEventListener("keydown", e => {
     if (e.ctrlKey) {
-        if (e.code === "KeyB") {
+        if (e.code === "KeyB" && e.shiftKey) {
             const mouseover = new Event("mouseover", { bubbles: true })
             const click = new Event("click", { bubbles: true })
             
