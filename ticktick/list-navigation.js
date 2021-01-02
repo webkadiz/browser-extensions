@@ -71,12 +71,14 @@ function makeListsResponsiveOnClick() {
 }
 
 function listResponsiveClickHandler(listsForHandler) {
-    let listsAll = document.querySelectorAll(".project, .custom-smart-project, l-folder")
+    let customSmartLists = document.querySelectorAll(".custom-smart-project")
 
     listsForHandler.forEach(listForHandler => {
         listForHandler.addEventListener("click", e => {
-            listsAll.forEach(list => list.classList.remove("active"))
-            e.currentTarget.classList.add("active")
+            customSmartLists.forEach(list => list.classList.remove("active"))
+            if (e.currentTarget.classList.contains("custom-smart-project")) {
+                e.currentTarget.classList.add("active")
+            }
         })
     })
 }
