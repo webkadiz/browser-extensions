@@ -26,5 +26,9 @@ window.addEventListener("keydown", e => {
                 searchForm.classList.add("inactive")
             })
         }
+        if (e.code === "KeyD") { // focus on editor
+            e.preventDefault()
+            document.querySelectorAll(".CodeMirror textarea")[2].focus()
+        }
     }
 })
