@@ -88,7 +88,7 @@ function createTimePlannerPopup() {
 
     timePredictionStr = generateTimePredictionStr()
 
-    popupContainer.className = "global-quick-add popup time-planner-popup"
+    popupContainer.className = "global-quick-add popup time-planner-popup popup-extension"
 
     markup = `
         <div>${timePredictionStr}</div>
