@@ -4,7 +4,6 @@ new MutationObserver(appShowUpHandler)
     })
 
 function appShowUpHandler() {
-    injectStyles()
     injectFontAwesomeScript()
 
     setOnWindowPopupApperHandler()
@@ -15,42 +14,6 @@ function appShowUpHandler() {
     }
 
     this.disconnect()
-}
-
-function injectStyles() {
-    let style = document.createElement("style")
-
-    style.innerHTML = `
-        .popup-extension {
-            width: auto !important;
-            height: auto !important;
-            min-height: auto !important;
-            position: fixed;
-            left: 50%;
-            transform: translateX(-50%) !important;
-            z-index: 10;
-        }
-
-        [class*=-dark-theme] .time-planner-popup-btn {
-            color: white;
-        }
-
-        .time-planner-popup-btn {
-            display: flex;
-            color: black;
-            opacity: .36;
-        }
-
-        .time-planner-popup-btn:hover {
-            opacity: .56;
-        }
-
-        .d-none {
-            display: none;
-        }
-    `
-
-    document.head.append(style)
 }
 
 function injectFontAwesomeScript() {
