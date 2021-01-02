@@ -44,6 +44,8 @@ function timePlannerPopupApperHandler() {
         timePlannerPopup,
         appContainer = document.querySelector("#container-main")
 
+    if (!timePlannerPopupBtn) return
+
     if (timePlannerPopupBtn.classList.contains("popup-open")) {
         timePlannerPopupBtn.classList.remove("popup-open")
         appContainer.querySelector(".time-planner-popup").remove()
