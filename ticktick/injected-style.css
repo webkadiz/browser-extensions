@@ -34,3 +34,11 @@
     right: auto !important;
     top: 50px !important;
 }
+
+.project-list-inner {
+    border: 2px solid transparent !important;
+}
+
+.project-list-inner.active {
+    border: 2px solid white !important;
+}
