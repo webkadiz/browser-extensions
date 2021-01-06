@@ -63,7 +63,7 @@ function makeListsResponsiveOnClick() {
     let
         listsAll = document
             .querySelector(".project-ul")
-            .querySelectorAll(".project, .custom-smart-project, .l-folder"),
+            .querySelectorAll(".project, .custom-smart-project, .f-header"),
         folderObserver
 
     listResponsiveClickHandler(listsAll)
@@ -86,19 +86,20 @@ function makeListsResponsiveOnClick() {
 }
 
 function listResponsiveClickHandler(listsForHandler) {
-    let customSmartLists = document.querySelectorAll(".custom-smart-project")
+    let
+        listsAll = document
+            .querySelector(".project-ul")
+            .querySelectorAll(".project, .custom-smart-project, .f-header")
 
     listsForHandler.forEach(listForHandler => {
         listForHandler.addEventListener("click", e => {
-            if (e.target.closest(".custom-smart-project") === null &&
+            if (
                 e.target.closest(".icon-more-for-folder") ||
                 e.target.closest(".icon-chevron-folder-open")
             ) return
 
-            customSmartLists.forEach(list => list.classList.remove("active"))
-            if (e.currentTarget.classList.contains("custom-smart-project")) {
-                e.currentTarget.classList.add("active")
-            }
+            listsAll.forEach(list => list.classList.remove("active"))
+            e.currentTarget.classList.add("active")
         })
     })
 }
