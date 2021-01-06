@@ -127,6 +127,7 @@ function searchInputInputHandler() {
 
 function searchInputKeydownHandler(e) {
     if (e.code === "Enter") {
+        if (document.querySelector(".suggest-item.focus")) return
         store.searchInput.blur()
     }
 }
