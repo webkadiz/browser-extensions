@@ -42,3 +42,11 @@
 .project-list-inner.active {
     border: 2px solid white !important;
 }
+
+.smart-project-view-area .project {
+    display: none;
+}
+
+#project-list-scroller > section .project {
+    display: none;
+}

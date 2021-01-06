@@ -47,20 +47,23 @@ function addDefaultSmartListsToCommonListContainer() {
 
     ;[...document.querySelectorAll(".smart-project-view-area .project")]
         .reverse()
+        .map(node => node.cloneNode(true))
         .forEach(defaultSmartList =>
             commonListContainer.prepend(defaultSmartList)
         )
 
     ;[...document.querySelectorAll("#project-list-scroller > section .project")]
+        .map(node => node.cloneNode(true))
         .forEach(restDefaultSmartList =>
             commonListContainer.append(restDefaultSmartList)
         )
 }
 
 function makeListsResponsiveOnClick() {
-    let listsAll = document.querySelectorAll(
-            ".project, .custom-smart-project, .l-folder"
-        ),
+    let
+        listsAll = document
+            .querySelector(".project-ul")
+            .querySelectorAll(".project, .custom-smart-project, .l-folder"),
         folderObserver
 
     listResponsiveClickHandler(listsAll)
@@ -289,7 +292,7 @@ function getCurrentList() {
 }
 
 function findListActiveElement() {
-    return document.querySelector(
+    return document.querySelector(".project-ul").querySelector(
         ".custom-smart-project.active, .project.active, .f-header.active"
     )
 }
