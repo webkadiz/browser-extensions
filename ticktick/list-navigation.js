@@ -316,6 +316,10 @@ function toggleActiveClass(newActiveList) {
         newActiveElement = newActiveList.querySelector(".f-header")
     }
 
+    newActiveElement.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    })
     newActiveElement.classList.add("active")
 }
 
