@@ -52,7 +52,7 @@ function addDefaultSmartListsToCommonListContainer() {
             commonListContainer.prepend(defaultSmartList)
         )
 
-    ;[...document.querySelectorAll("#project-list-scroller > section .project")]
+    ;[...document.querySelectorAll("#project-list-scroller > section:not(#smart-project-view-area) .project")]
         .map(node => node.cloneNode(true))
         .forEach(restDefaultSmartList =>
             commonListContainer.append(restDefaultSmartList)
