@@ -80,7 +80,7 @@ const styles = `
 
     .icon-pause::before, .icon-pause::after {
         content: "";
-        width: 3px;
+        width: 2px;
         background: white;
         border-radius: 1px;
     }
