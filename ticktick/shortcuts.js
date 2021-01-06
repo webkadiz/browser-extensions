@@ -10,11 +10,13 @@ window.addEventListener("keydown", e => {
         }
         if (e.code === "KeyF") {
             e.preventDefault()
-            document.querySelector(".CodeMirror textarea").focus()
+            if (document.querySelector(".CodeMirror textarea"))
+                document.querySelector(".CodeMirror textarea").focus()
         }
         if (e.code === "KeyD") { // focus on editor
             e.preventDefault()
-            document.querySelectorAll(".CodeMirror textarea")[2].focus()
+            if (document.querySelectorAll(".CodeMirror textarea")[2])
+                document.querySelectorAll(".CodeMirror textarea")[2].focus()
         }
     }
 })
