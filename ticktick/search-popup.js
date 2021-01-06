@@ -24,7 +24,7 @@ function fillStore() {
 
 function setSearchPopupHandler() {
     window.addEventListener("keydown", e => {
-        if (e.ctrlKey && e.code === "KeyE") {            
+        if (e.ctrlKey && e.code === "KeyE" && !e.shiftKey) {
             const isPopupOpen = store.searchForm.classList.contains("popup")
 
             e.preventDefault()
