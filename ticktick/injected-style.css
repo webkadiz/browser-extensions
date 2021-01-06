@@ -50,3 +50,7 @@
 #project-list-scroller > section .project {
     display: none;
 }
+
+#project-list-view {
+    padding-bottom: 112px !important;
+}
