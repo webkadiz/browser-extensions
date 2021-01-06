@@ -165,7 +165,10 @@ function listMovingHandler(e) {
 function listMovingStart() {
     if (state.isListMoving === true) return
 
+    document.querySelectorAll("*").forEach(node => node.blur())
     document.querySelector(".project-list-inner").classList.add("active")
+
+    document.querySelector(".task-input")?.classList.remove("focus")
 
     state.isListMoving = true
     setActiveElement()
