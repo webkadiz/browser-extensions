@@ -26,11 +26,12 @@ const styles = `
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #303132;
+        background: var(--theme-pomotimer-bg);
     }
 
     .my-timer .time {
         font-size: 18px;
+        color: var(--theme-pomotimer-time-color);
     }
 
     .icon-panel {
@@ -40,18 +41,20 @@ const styles = `
     }
 
     .icon-container {
+        color: var(--theme);
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 30px;
-        height: 30px;
-        border: 2px solid grey;
+        width: 28px;
+        height: 28px;
+        border: 2px solid rgba(75,111,222,.36);
+        border-color: rgba(var(--theme-pomotimer-progress-color-rgb),.36);
         border-radius: 50%;
         cursor: pointer;
     }
 
     .icon-container:hover {
-        border-color: lightgrey;
+        border-color: rgba(var(--theme-pomotimer-progress-color-rgb),.48);
     }
 
     .icon-container-stop {
@@ -62,12 +65,13 @@ const styles = `
         width: 10px;
         height: 10px;
         padding-left: 2px;
+        fill: var(--theme-pomotimer-progress-color);
     }
 
     .icon-stop {
         width: 10px;
         height: 10px;
-        background: white;
+        background: var(--theme-pomotimer-progress-color);
         border-radius: 2px;
     }
 
@@ -80,9 +84,33 @@ const styles = `
 
     .icon-pause::before, .icon-pause::after {
         content: "";
-        width: 2px;
-        background: white;
+        width: 3px;
+        background: var(--theme-pomotimer-progress-color);
         border-radius: 1px;
+    }
+
+    .grey-theme .my-timer {
+        background-color: #e5e8ee;
+    }
+    
+    .grey-theme .icon-container {
+        border: 2px solid rgba(75,111,222,.36);
+    }
+
+    .grey-theme .icon-container:hover {
+        border: 2px solid rgba(75,111,222,.48);
+    }
+
+    .grey-theme .icon-play {
+        fill: #4b6fde; 
+    }
+
+    .grey-theme .icon-stop {
+        background: #4b6fde;
+    }
+
+    .grey-theme .icon-pause::before, .grey-theme .icon-pause::after {
+        background: #4b6fde;
     }
 
     .state-play .icon-pause {
