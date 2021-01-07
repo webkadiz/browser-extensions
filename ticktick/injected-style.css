@@ -40,7 +40,11 @@
 }
 
 .project-list-inner.active {
-    border: 2px solid white !important;
+    border: 2px solid rgba(var(--theme-basestyle-font-color),.75) !important;
+}
+
+.grey-theme .project-list-inner.active {
+    border: 2px solid rgba(0,0,0,.85) !important;
 }
 
 .smart-project-view-area .project {
