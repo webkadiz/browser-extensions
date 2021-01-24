@@ -33,7 +33,9 @@ function injectTimePlannerPopupBtn() {
 
 	timePlannerPopupBtn = headerRightBar.firstElementChild.cloneNode(true)
 
-	timePlannerPopupBtn.firstElementChild.innerHTML = `<div class="time-planner-popup-btn"><i class="fas fa-ruler"></i></div>`
+	timePlannerPopupBtn.firstElementChild.innerHTML = `
+		<div class="time-planner-popup-btn"><i class="fas fa-ruler"></i></div>
+	`
 	headerRightBar.prepend(timePlannerPopupBtn)
 
 	timePlannerPopupBtn.addEventListener("click", timePlannerPopupApperHandler)
