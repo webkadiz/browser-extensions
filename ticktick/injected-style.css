@@ -1,60 +1,60 @@
 .popup-extension {
-    width: auto !important;
-    height: auto !important;
-    min-height: auto !important;
-    position: fixed !important;
-    left: 50%;
-    transform: translateX(-50%) !important;
-    z-index: 10;
+	width: auto !important;
+	height: auto !important;
+	min-height: auto !important;
+	position: fixed !important;
+	left: 50%;
+	transform: translateX(-50%) !important;
+	z-index: 10;
 }
 
-[class*=-dark-theme] .time-planner-popup-btn {
-    color: white;
+[class*="-dark-theme"] .time-planner-popup-btn {
+	color: white;
 }
 
 .time-planner-popup-btn {
-    display: flex;
-    color: black;
-    opacity: .36;
+	display: flex;
+	color: black;
+	opacity: 0.36;
 }
 
 .time-planner-popup-btn:hover {
-    opacity: .56;
+	opacity: 0.56;
 }
 
 .d-none {
-    display: none !important;
+	display: none !important;
 }
 
 .position-static {
-    position: static !important;
+	position: static !important;
 }
 
 .search-suggest-override {
-    right: auto !important;
-    top: 50px !important;
+	right: auto !important;
+	top: 50px !important;
 }
 
 .project-list-inner {
-    border: 2px solid transparent !important;
+	border: 2px solid transparent !important;
 }
 
 .project-list-inner.active {
-    border: 2px solid rgba(var(--theme-basestyle-font-color),.75) !important;
+	border: 2px solid rgba(var(--theme-basestyle-font-color), 0.75) !important;
 }
 
 .grey-theme .project-list-inner.active {
-    border: 2px solid rgba(0,0,0,.85) !important;
+	border: 2px solid rgba(0, 0, 0, 0.85) !important;
 }
 
 .smart-project-view-area .project {
-    display: none;
+	display: none;
 }
 
 #project-list-scroller > section .project {
-    display: none;
+	display: none;
 }
 
 #project-list-view {
-    padding-bottom: 112px !important;
+	padding-bottom: 112px !important;
 }

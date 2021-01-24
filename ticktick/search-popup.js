@@ -1,133 +1,133 @@
 const store = {
-    searchFormSpy: null,
-    searchForm: null,
-    searchInput: null,
-    appContainer: null,
+	searchFormSpy: null,
+	searchForm: null,
+	searchInput: null,
+	appContainer: null
 }
 
-new MutationObserver(appShowUpHandler)
-    .observe(document.querySelector("#root"), {
-        childList: true
-    })
+new MutationObserver(appShowUpHandler).observe(
+	document.querySelector("#root"),
+	{
+		childList: true
+	}
+)
 
 function appShowUpHandler() {
-    fillStore()
-    setSearchPopupHandler()
-    setSearchInputHandlers()
+	fillStore()
+	setSearchPopupHandler()
+	setSearchInputHandlers()
 }
 
 function fillStore() {
-    store.searchForm = document.querySelector(".search-form")
-    store.searchInput = document.querySelector(".search-box")
-    store.appContainer = document.querySelector("#container-main")
+	store.searchForm = document.querySelector(".search-form")
+	store.searchInput = document.querySelector(".search-box")
+	store.appContainer = document.querySelector("#container-main")
 }
 
 function setSearchPopupHandler() {
-    window.addEventListener("keydown", e => {
-        if (e.ctrlKey && e.code === "KeyE" && !e.shiftKey) {
-            const isPopupOpen = store.searchForm.classList.contains("popup")
+	window.addEventListener("keydown", (e) => {
+		if (e.ctrlKey && e.code === "KeyE" && !e.shiftKey) {
+			const isPopupOpen = store.searchForm.classList.contains("popup")
 
-            e.preventDefault()
+			e.preventDefault()
 
-            store.searchInput.blur()
+			store.searchInput.blur()
 
-            if (!isPopupOpen) {
-                handleSearchPopup()
-            }
-        }
-    })
+			if (!isPopupOpen) {
+				handleSearchPopup()
+			}
+		}
+	})
 }
 
 function handleSearchPopup() {
-    store.searchFormSpy = spyForSearchForm()
-    searchFormAddClasses()
-    processSearchInput()
+	store.searchFormSpy = spyForSearchForm()
+	searchFormAddClasses()
+	processSearchInput()
 }
 
 function spyForSearchForm() {
-    const spy = new MutationObserver(processSearchFormDynamicElements)
+	const spy = new MutationObserver(processSearchFormDynamicElements)
 
-    processSearchFormDynamicElements()
-    
-    spy.observe(store.searchForm, { childList: true })
+	processSearchFormDynamicElements()
 
-    return spy
+	spy.observe(store.searchForm, { childList: true })
+
+	return spy
 }
 
 function processSearchFormDynamicElements() {
-    let 
-        searchSuggest = document.querySelector(".search-suggest"),
-        searchClose = document.querySelector(".delete.fake-del")
-     
-    if (searchSuggest) {
-        searchSuggest.classList.add("search-suggest-override")
-        searchClose.classList.add("d-none")
-    }
+	let searchSuggest = document.querySelector(".search-suggest"),
+		searchClose = document.querySelector(".delete.fake-del")
+
+	if (searchSuggest) {
+		searchSuggest.classList.add("search-suggest-override")
+		searchClose.classList.add("d-none")
+	}
 }
 
 function searchFormAddClasses() {
-    store.searchForm.classList.remove("inactive")
-    store.searchForm.classList.add("active")
-    store.searchForm.classList.add("global-quick-add")
-    store.searchForm.classList.add("popup")
-    store.searchForm.classList.add("popup-extension")
+	store.searchForm.classList.remove("inactive")
+	store.searchForm.classList.add("active")
+	store.searchForm.classList.add("global-quick-add")
+	store.searchForm.classList.add("popup")
+	store.searchForm.classList.add("popup-extension")
 }
 
 function searchFormRemoveClasses() {
-    store.searchForm.classList.remove("global-quick-add")
-    store.searchForm.classList.remove("popup")
-    store.searchForm.classList.remove("popup-extension")
-    store.searchForm.classList.remove("active")
-    store.searchForm.classList.add("inactive")
+	store.searchForm.classList.remove("global-quick-add")
+	store.searchForm.classList.remove("popup")
+	store.searchForm.classList.remove("popup-extension")
+	store.searchForm.classList.remove("active")
+	store.searchForm.classList.add("inactive")
 }
 
 function processSearchInput() {
-    store.searchInput.value = ""
-    store.searchInput.classList.add("position-static")
-    store.searchInput.focus()
+	store.searchInput.value = ""
+	store.searchInput.classList.add("position-static")
+	store.searchInput.focus()
 }
 
 function setSearchInputHandlers() {
-    store.searchInput.addEventListener("focus", searchInputFocusHandler)
-    store.searchInput.addEventListener("blur", searchInputBlurHandler)
-    store.searchInput.addEventListener("input", searchInputInputHandler)
-    store.searchInput.addEventListener("keydown", searchInputKeydownHandler)
+	store.searchInput.addEventListener("focus", searchInputFocusHandler)
+	store.searchInput.addEventListener("blur", searchInputBlurHandler)
+	store.searchInput.addEventListener("input", searchInputInputHandler)
+	store.searchInput.addEventListener("keydown", searchInputKeydownHandler)
 }
 
 function searchInputFocusHandler() {
-    let searchSuggest = document.querySelector(".search-suggest")
+	let searchSuggest = document.querySelector(".search-suggest")
 
-    store.searchInput.value = ""
+	store.searchInput.value = ""
 
-    if (searchSuggest) {
-        searchSuggest.classList.add("d-none")
-    }
+	if (searchSuggest) {
+		searchSuggest.classList.add("d-none")
+	}
 }
 
 function searchInputBlurHandler() {
-    store.searchInput.classList.remove("position-static")
+	store.searchInput.classList.remove("position-static")
 
-    
-    searchFormRemoveClasses()        
+	searchFormRemoveClasses()
 
-    store.appContainer.dispatchEvent(new Event("click", { bubbles: true }))
+	store.appContainer.dispatchEvent(new Event("click", { bubbles: true }))
 
-    if (store.searchFormSpy) {
-        store.searchFormSpy.disconnect()
-    }
+	if (store.searchFormSpy) {
+		store.searchFormSpy.disconnect()
+	}
 }
 
 function searchInputInputHandler() {
-    let searchSuggest = document.querySelector(".search-suggest")
+	let searchSuggest = document.querySelector(".search-suggest")
 
-    if (searchSuggest) {
-        searchSuggest.classList.remove("d-none")
-    }
+	if (searchSuggest) {
+		searchSuggest.classList.remove("d-none")
+	}
 }
 
 function searchInputKeydownHandler(e) {
-    if (e.code === "Enter") {
-        if (document.querySelector(".suggest-item.focus")) return
-        store.searchInput.blur()
-    }
+	if (e.code === "Enter") {
+		if (document.querySelector(".suggest-item.focus")) return
+		store.searchInput.blur()
+	}
 }

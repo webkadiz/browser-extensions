@@ -1,14 +1,16 @@
-new MutationObserver(appShowUpHandler)
-    .observe(document.querySelector("#root"), {
-        childList: true
-    })
+new MutationObserver(appShowUpHandler).observe(
+	document.querySelector("#root"),
+	{
+		childList: true
+	}
+)
 
 function appShowUpHandler() {
-    const pomoContainer = document.querySelector("#left-bottom-view")
+	const pomoContainer = document.querySelector("#left-bottom-view")
 
-    pomoContainer.prepend(timerContainer)
+	pomoContainer.prepend(timerContainer)
 
-    this.disconnect()
+	this.disconnect()
 }
 
 let startTime
@@ -136,116 +138,119 @@ const layout = `
 `
 
 timerContainer.classList.add("my-timer")
-timerContainer.innerHTML = styles + layout 
+timerContainer.innerHTML = styles + layout
 
 const timeEl = timerContainer.querySelector(".time")
 const playPauseEl = timerContainer.querySelector(".icon-container-play-pause")
 const stopEl = timerContainer.querySelector(".icon-container-stop")
 
 function genTimeStr(seconds) {
-    let hours, minutes
+	let hours, minutes
 
-    hours = Math.floor(seconds / 3600)
-    seconds -= hours * 3600
-    minutes = Math.floor(seconds / 60)
-    seconds -= minutes * 60
+	hours = Math.floor(seconds / 3600)
+	seconds -= hours * 3600
+	minutes = Math.floor(seconds / 60)
+	seconds -= minutes * 60
 
-    hours = String(hours).length === 1 ? "0" + hours : "" + hours
-    minutes = String(minutes).length === 1 ? "0" + minutes : "" + minutes
-    seconds = String(seconds).length === 1 ? "0" + seconds : "" + seconds
+	hours = String(hours).length === 1 ? "0" + hours : "" + hours
+	minutes = String(minutes).length === 1 ? "0" + minutes : "" + minutes
+	seconds = String(seconds).length === 1 ? "0" + seconds : "" + seconds
 
-    return `${hours}:${minutes}:${seconds}`
+	return `${hours}:${minutes}:${seconds}`
 }
 
 function genTickTickTimeFormat(date) {
-    let timeStr = date.toISOString()
+	let timeStr = date.toISOString()
 
-    timeStr = timeStr.slice(0, timeStr.length - 1) + "+0000"
+	timeStr = timeStr.slice(0, timeStr.length - 1) + "+0000"
 
-    console.log(timeStr)
-    return timeStr
+	console.log(timeStr)
+	return timeStr
 }
 
 function genRequestPayload(startTime, endTime) {
-    return JSON.stringify([
-        {
-            local: true,
-            startTime: genTickTickTimeFormat(startTime),
-            endTime: genTickTickTimeFormat(endTime),
-            status: 1,
-            id: "id",
-            tasks: [
-                {
-                    startTime: genTickTickTimeFormat(startTime),
-                    endTime: genTickTickTimeFormat(endTime)
-                }
-            ]
-        }
-    ])
+	return JSON.stringify([
+		{
+			local: true,
+			startTime: genTickTickTimeFormat(startTime),
+			endTime: genTickTickTimeFormat(endTime),
+			status: 1,
+			id: "id",
+			tasks: [
+				{
+					startTime: genTickTickTimeFormat(startTime),
+					endTime: genTickTickTimeFormat(endTime)
+				}
+			]
+		}
+	])
 }
 
 function makeRequestToTickTickPomodoro() {
-    requestPayload = genRequestPayload(startTime, endTime)
+	requestPayload = genRequestPayload(startTime, endTime)
 
-    fetch("/api/v2/batch/pomodoro", {
-        method: "POST",
-        body: requestPayload,
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8'
-        },
-    }).then(res => {
-        return res.json()
-    }).then(data => {
-        if (Object.keys(data.id2error).length !== 0) {
-            alert("fetch pomodoro, returns not json")
-            console.log(data)
-        }
-    }).catch(err => {
-        alert("fetch pomodoro" + err)
-    })
+	fetch("/api/v2/batch/pomodoro", {
+		method: "POST",
+		body: requestPayload,
+		headers: {
+			"Content-Type": "application/json;charset=UTF-8"
+		}
+	})
+		.then((res) => {
+			return res.json()
+		})
+		.then((data) => {
+			if (Object.keys(data.id2error).length !== 0) {
+				alert("fetch pomodoro, returns not json")
+				console.log(data)
+			}
+		})
+		.catch((err) => {
+			alert("fetch pomodoro" + err)
+		})
 }
 
 function startTimer() {
-    startTime = new Date()
+	startTime = new Date()
 
-    playPauseEl.classList.remove("state-play")
-    playPauseEl.classList.add("state-pause")
+	playPauseEl.classList.remove("state-play")
+	playPauseEl.classList.add("state-pause")
 
-    timerInterval = setInterval(() => {
-        timePassed += 1
-        timeEl.innerHTML = genTimeStr(timePassed)
-    }, 1000)
+	timerInterval = setInterval(() => {
+		timePassed += 1
+		timeEl.innerHTML = genTimeStr(timePassed)
+	}, 1000)
 }
 
 function endTimer() {
-    if (playPauseEl.classList.contains("state-play")) return
+	if (playPauseEl.classList.contains("state-play")) return
 
-    endTime = new Date()
+	endTime = new Date()
 
-    playPauseEl.classList.remove("state-pause")
-    playPauseEl.classList.add("state-play")
+	playPauseEl.classList.remove("state-pause")
+	playPauseEl.classList.add("state-play")
 
-    makeRequestToTickTickPomodoro()    
+	makeRequestToTickTickPomodoro()
 
-    clearInterval(timerInterval)
+	clearInterval(timerInterval)
 }
 
 playPauseEl.addEventListener("click", () => {
-    if (playPauseEl.classList.contains("state-play")) {
-        startTimer()
-    } else {
-        endTimer() 
-    }
+	if (playPauseEl.classList.contains("state-play")) {
+		startTimer()
+	} else {
+		endTimer()
+	}
 })
 
 stopEl.addEventListener("click", () => {
-    timePassed = 0
-    timeEl.innerHTML = genTimeStr(timePassed)
+	timePassed = 0
+	timeEl.innerHTML = genTimeStr(timePassed)
 
-    playPauseEl.classList.remove("state-pause")
-    playPauseEl.classList.add("state-play")
+	playPauseEl.classList.remove("state-pause")
+	playPauseEl.classList.add("state-play")
 })
 
 window.addEventListener("beforeunload", () => {
-    endTimer()
+	endTimer()
 })
