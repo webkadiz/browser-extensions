@@ -55,11 +55,7 @@ function observeAppState() {
     }).observe(document.querySelector(appSelector), { attributes: true })
 }
 
-function start() {
-    waitFor(sidebarSelector, hideSidebar)
-    waitFor(appSelector, observeAppState)
-    waitFor(videoStreamSelector, observeVideoStream)
-
+function setSidebarStateKeyboardHandler() {
     window.addEventListener("keydown", (e) => {
         if (e.ctrlKey && e.shiftKey && e.code === "KeyY" && sidebarIsOpen) {
             hideSidebar()
@@ -72,6 +68,13 @@ function start() {
             openSidebar()
         }
     })
+}
+
+function start() {
+    waitFor(sidebarSelector, hideSidebar)
+    waitFor(appSelector, observeAppState)
+    waitFor(videoStreamSelector, observeVideoStream)
+    setSidebarStateKeyboardHandler()
 }
 
 let appSelector = "ytd-app",
