@@ -1,8 +1,14 @@
 function waitFor(selector, callback) {
-    let el, timer
+    let el, timer, timePassed = 0
 
     timer = setInterval(() => {
         el = document.querySelector(selector)
+        timePassed += 50
+
+        if (timePassed > 3000) {
+            console.error("timer timeout")
+            clearInterval(timer)
+        }
 
         if (el !== null) {
             clearInterval(timer)
