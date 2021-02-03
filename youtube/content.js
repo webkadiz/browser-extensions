@@ -56,11 +56,9 @@ function observeAppState() {
 }
 
 function start() {
-    window.addEventListener("load", () => {
-        waitFor(sidebarSelector, hideSidebar)
-        waitFor(appSelector, observeAppState)
-        waitFor(videoStreamSelector, observeVideoStream)
-    })
+    waitFor(sidebarSelector, hideSidebar)
+    waitFor(appSelector, observeAppState)
+    waitFor(videoStreamSelector, observeVideoStream)
 
     window.addEventListener("keydown", (e) => {
         if (e.ctrlKey && e.shiftKey && e.code === "KeyY" && sidebarIsOpen) {
