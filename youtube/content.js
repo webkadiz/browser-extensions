@@ -1,3 +1,6 @@
+const state = {}
+const data = {}
+
 function waitFor(selector, callback) {
     let el, timer, timePassed = 0
 
@@ -18,23 +21,23 @@ function waitFor(selector, callback) {
 }
 
 function hideSidebar() {
-    document.querySelectorAll(sidebarSelector).forEach((sidebar) => {
+    document.querySelectorAll(data.sidebarSelector).forEach((sidebar) => {
         sidebar.style.display = "none"
     })
 
-    sidebarIsOpen = false
+    state.sidebarIsOpen = false
 }
 
 function openSidebar() {
-    document.querySelectorAll(sidebarSelector).forEach((sidebar) => {
+    document.querySelectorAll(data.sidebarSelector).forEach((sidebar) => {
         sidebar.style.display = ""
     })
 
-    sidebarIsOpen = true
+    state.sidebarIsOpen = true
 }
 
 function fitVideoStream() {
-    let videoStream = document.querySelector(videoStreamSelector)
+    let videoStream = document.querySelector(data.videoStreamSelector)
 
     videoStream.parentElement.style.height = "100%"
     videoStream.style.height = "100%"
@@ -44,7 +47,7 @@ function fitVideoStream() {
 function observeVideoStream() {
     new MutationObserver(() => {
         fitVideoStream()
-    }).observe(document.querySelector(videoStreamSelector), {
+    }).observe(document.querySelector(data.videoStreamSelector), {
         attributes: true
     })
 }
@@ -52,34 +55,41 @@ function observeVideoStream() {
 function observeAppState() {
     new MutationObserver(() => {
         hideSidebar()
-    }).observe(document.querySelector(appSelector), { attributes: true })
+    }).observe(document.querySelector(data.appSelector), { attributes: true })
 }
 
 function setSidebarStateKeyboardHandler() {
     window.addEventListener("keydown", (e) => {
-        if (e.ctrlKey && e.shiftKey && e.code === "KeyY" && sidebarIsOpen) {
+        if (e.ctrlKey && e.shiftKey && e.code === "KeyY" && state.sidebarIsOpen) {
             hideSidebar()
         } else if (
             e.ctrlKey &&
             e.shiftKey &&
             e.code === "KeyY" &&
-            sidebarIsOpen === false
+            state.sidebarIsOpen === false
         ) {
             openSidebar()
         }
     })
 }
 
-function start() {
-    waitFor(sidebarSelector, hideSidebar)
-    waitFor(appSelector, observeAppState)
-    waitFor(videoStreamSelector, observeVideoStream)
-    setSidebarStateKeyboardHandler()
+function initState() {
+    state.sidebarIsOpen = false
 }
 
-let appSelector = "ytd-app",
-    sidebarSelector = "#secondary",
-    videoStreamSelector = ".video-stream",
-    sidebarIsOpen = false
+function initData() {
+    data.appSelector = "ytd-app"
+    data.sidebarSelector = "#secondary"
+    data.videoStreamSelector = ".video-stream"
+}
+
+function start() {
+    initState()
+    initData()
+    waitFor(data.sidebarSelector, hideSidebar)
+    waitFor(data.appSelector, observeAppState)
+    waitFor(data.videoStreamSelector, observeVideoStream)
+    setSidebarStateKeyboardHandler()
+}
 
 start()
