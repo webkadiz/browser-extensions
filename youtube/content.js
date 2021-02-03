@@ -2,7 +2,9 @@ const state = {}
 const data = {}
 
 function waitFor(selector, callback) {
-    let el, timer, timePassed = 0
+    let el,
+        timer,
+        timePassed = 0
 
     timer = setInterval(() => {
         el = document.querySelector(selector)
@@ -60,7 +62,12 @@ function observeAppState() {
 
 function setSidebarStateKeyboardHandler() {
     window.addEventListener("keydown", (e) => {
-        if (e.ctrlKey && e.shiftKey && e.code === "KeyY" && state.sidebarIsOpen) {
+        if (
+            e.ctrlKey &&
+            e.shiftKey &&
+            e.code === "KeyY" &&
+            state.sidebarIsOpen
+        ) {
             hideSidebar()
         } else if (
             e.ctrlKey &&
